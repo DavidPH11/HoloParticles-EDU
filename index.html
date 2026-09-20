@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#01030A"/>
 <title>Holo Particles EDU</title>
 
+<!-- ===== FAVICON ===== -->
+<link rel="icon" type="image/svg+xml" href="holos.svg">
+<link rel="alternate icon" href="holos.svg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1274,7 +1278,6 @@ window.addEventListener('resize', () => {
     resizeTimer = setTimeout(() => { resize(); buildAtom(); }, 160);
 });
 
-// Pausa el rAF de la intro si la pestaña no está visible
 document.addEventListener('visibilitychange', () => {
     if (!window.__holoIntroActive) return;
     if (!document.hidden) {
@@ -1318,7 +1321,6 @@ const PLANET_ROT     = 0.045;
 const RING_ROT_BASE   = 0.012;
 const RING_ROT        = RING_ROT_BASE * 1.35;
 
-// Pausa del render si la pestaña no está visible
 let tabVisible = true;
 document.addEventListener('visibilitychange', () => { tabVisible = !document.hidden; });
 
@@ -1895,7 +1897,6 @@ void main() {
 }
 `;
 
-// ✔ Esfera optimizada: 96x72 en lugar de 640x384
 const planet = new THREE.Mesh(
 new THREE.SphereGeometry(R, 96, 72),
 new THREE.ShaderMaterial({
@@ -1937,7 +1938,6 @@ fragmentShader: `
 `,
 transparent: true, blending: THREE.AdditiveBlending, depthWrite: false,
 });
-// ✔ Atmósfera optimizada
 const atmosphere = new THREE.Mesh(new THREE.SphereGeometry(R * 1.055, 64, 48), atmoMat);
 systemGroup.add(atmosphere);
 
@@ -1964,7 +1964,6 @@ fragmentShader: `
 `,
 transparent: true, blending: THREE.AdditiveBlending, depthWrite: false,
 });
-// ✔ Halo optimizado
 const halo = new THREE.Mesh(new THREE.SphereGeometry(R * 1.10, 48, 36), haloMat);
 systemGroup.add(halo);
 
@@ -2076,7 +2075,6 @@ void main() {
 }
 `;
 
-// ✔ Anillos optimizados: 512 segmentos en lugar de 3072
 const ringGeo = new THREE.RingGeometry(RING_IN, RING_OUT, 512, 1);
 const ringMat = new THREE.ShaderMaterial({
 uniforms: ringUniforms,
@@ -2186,7 +2184,6 @@ function frame() {
 if (!window.__holoIntroActive) return;
 requestAnimationFrame(frame);
 
-// ✔ Si la pestaña no está visible, no renderiza (ahorra GPU/batería)
 if (!tabVisible) return;
 
 const dt = Math.min(clock.getDelta(), 0.05);
@@ -2276,7 +2273,6 @@ function resizeStars(){
 }
 
 function buildStars(){
-    // ✔ Menos densidad que antes: /4500 en lugar de /3000
     const N = Math.round((SW * SH) / 4500);
     stars = [];
     for (let i = 0; i < N; i++){
@@ -2391,8 +2387,8 @@ const g = c.getContext('2d', { alpha: true, desynchronized: true });
 let AW = 0, AH = 0, DPR = Math.min(devicePixelRatio || 1, 1.5);
 
 const MAX_AGE = 900;
-const MAX_POINTS = 180;   // ✔ antes 220
-const SAMPLE_MAX = 36;    // ✔ antes 48
+const MAX_POINTS = 180;
+const SAMPLE_MAX = 36;
 
 let trail = [];
 let lastMoveT = 0;
@@ -2484,7 +2480,6 @@ function frame(now){
     requestAnimationFrame(frame);
     if (!tabVisible) return;
 
-    // ✔ Si no hay puntos activos y el cursor lleva >1.5s quieto, no dibuja nada
     if (trail.length === 0 && (now - lastMoveT) > 1500) return;
 
     g.clearRect(0, 0, AW, AH);

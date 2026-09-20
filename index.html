@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#01030A"/>
 <title>Holo Particles EDU</title>
 
-<!-- ===== FAVICON (nombre "holos") ===== -->
-<link rel="icon" type="image/svg+xml" sizes="any" href="holos?v=3">
-<link rel="shortcut icon" type="image/svg+xml" href="holos?v=3">
-<link rel="apple-touch-icon" href="holos?v=3">
+<!-- ===== FAVICON (nombre "holos.svg") ===== -->
+<link rel="icon" type="image/svg+xml" sizes="any" href="holos.svg?v=4">
+<link rel="shortcut icon" type="image/svg+xml" href="holos.svg?v=4">
+<link rel="apple-touch-icon" href="holos.svg?v=4">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -926,7 +926,7 @@ enterBtn.addEventListener('click', (e) => {
 
 /* ✅ NUEVO: click en cualquier parte del fondo detiene el sonido */
 introStage.addEventListener('click', (e) => {
-    if (e.target.closest('#enterBtn')) return;   // el botón ya tiene su propio handler
+    if (e.target.closest('#enterBtn')) return;
     if (typeof window.__stopIntroSound === 'function') {
         window.__stopIntroSound();
     }

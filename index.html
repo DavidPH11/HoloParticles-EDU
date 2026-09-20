@@ -6,10 +6,8 @@
 <meta name="theme-color" content="#01030A"/>
 <title>Holo Particles EDU</title>
 
-<!-- ===== FAVICON (nombre "holos.svg") ===== -->
-<link rel="icon" type="image/svg+xml" sizes="any" href="holos.svg?v=4">
-<link rel="shortcut icon" type="image/svg+xml" href="holos.svg?v=4">
-<link rel="apple-touch-icon" href="holos.svg?v=4">
+<!-- ===== FAVICON (embebido, sin dependencia de archivos externos) ===== -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25'%3E%3Cstop offset='0%25' stop-color='%23ff5c5c'/%3E%3Cstop offset='40%25' stop-color='%23ffd166'/%3E%3Cstop offset='70%25' stop-color='%2306d6a0'/%3E%3Cstop offset='100%25' stop-color='%234d9dff'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M50 5 Q53 47 95 50 Q53 53 50 95 Q47 53 5 50 Q47 47 50 5 Z' fill='url(%23g)'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -924,7 +922,7 @@ enterBtn.addEventListener('click', (e) => {
     enterApp();
 });
 
-/* ✅ NUEVO: click en cualquier parte del fondo detiene el sonido */
+/* Click en cualquier parte del fondo detiene el sonido */
 introStage.addEventListener('click', (e) => {
     if (e.target.closest('#enterBtn')) return;
     if (typeof window.__stopIntroSound === 'function') {
@@ -3014,13 +3012,13 @@ requestAnimationFrame(draw);
     } catch (e) {}
   }
 
-  // ✅ Exponer la función para que el click en el fondo pueda detener el sonido
+  // Exponer la función para que el click en el fondo pueda detener el sonido
   window.__stopIntroSound = stopIntroSound;
 
   // Intento de autoplay al cargar
   startIntroSound();
 
-  // 🛡️ Safety net: la música nunca dura más de 30 segundos
+  // Safety net: la música nunca dura más de 30 segundos
   introSoundTimer = setTimeout(stopIntroSound, 30000);
 
   // Fallback de autoplay (si el navegador bloqueó el sonido inicial)
